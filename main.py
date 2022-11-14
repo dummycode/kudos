@@ -2,21 +2,25 @@
 
 import requests
 import argparse
+import json
 
 BASE_URL = "https://www.strava.com"
 FEED_ACTIVITY = "/feed/activity/"
 ACTIVITY = "/activities/"
 
-headers = {}
-
 class StravaClient:
     def __init__(self):
         print("Initializing client")
 
+        with open('headers.json') as json_file:
+            self.headers = json.load(json_file)
+
+
+
     def kudos(self, activity):
         url = BASE_URL + FEED_ACTIVITY + str(activity) + "/kudo"
 
-        response = requests.request("POST", url, headers=headers, data={})
+        response = requests.request("POST", url, headers=self.headers, data={})
 
         if response.status_code == 200:
             print("Successfully gave kudos to " + str(activity))
