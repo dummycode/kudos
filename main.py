@@ -35,12 +35,12 @@ def main():
     client = StravaClient()
 
     parser = argparse.ArgumentParser(description='Give kudos to random strangers')
-    parser.add_argument('--start', dest='start', help='The activity to begin with')
-    parser.add_argument('--count', dest='count', help='Number of activities to do')
+    parser.add_argument('--start', dest='start', type=int, help='The activity to begin with')
+    parser.add_argument('--count', dest='count', nargs='?', const=50, type=int, default=50, help='Number of activities to do')
 
     args = parser.parse_args()
-    start = int(args.start)
-    count = int(args.count)
+    start = args.start
+    count = args.count
 
     i = 0
     successes = 0
